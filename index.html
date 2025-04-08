@@ -382,6 +382,12 @@
             border: none;
         }
         
+        .news-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .news-date {
             position: absolute;
             top: 10px;
@@ -457,6 +463,7 @@
             font-size: 35px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 2001;
         }
         
         .video-controls {
@@ -466,6 +473,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
+            z-index: 2001;
         }
         
         .video-controls button {
@@ -475,6 +483,9 @@
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         @media (max-width: 768px) {
@@ -659,27 +670,38 @@
                 
                 <div class="news-card">
                   <div class="news-media">
-                     <iframe src="brain.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen muted class="enlargeable-video"></iframe>
+                     <video class="enlargeable-video" muted controls>
+                        <source src="brain.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                     </video>
                      <div class="news-date">10 Février 2024</div>
                   </div>
                   <div class="news-content">
                      <h3>Debut de NUKUNU SOLAR</h3>
-                     <p>Mise en place du projet NUKUNU SOLAR </p>
+                     <p>Mise en place du projet NUKUNU SOLAR</p>
                   </div>
                 </div>
+                
                 <div class="news-card">
                     <div class="news-media">
-                        <iframe src="foire.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen muted class="enlargeable-video"></iframe>
+                        <video class="enlargeable-video" muted controls>
+                           <source src="foire.mp4" type="video/mp4">
+                           Votre navigateur ne supporte pas les vidéos HTML5.
+                        </video>
                         <div class="news-date">12 Decembre 2024</div>
                     </div>
                     <div class="news-content">
                         <h3>Recherche de partenariat</h3>
-                        <p>recherche de partenariats à la foire Togo 2000.</p>
+                        <p>Recherche de partenariats à la foire Togo 2000.</p>
                     </div>
                 </div>
+                
                 <div class="news-card">
                   <div class="news-media">
-                      <iframe src="vente.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen muted class="enlargeable-video"></iframe>
+                      <video class="enlargeable-video" muted controls>
+                         <source src="vente.mp4" type="video/mp4">
+                         Votre navigateur ne supporte pas les vidéos HTML5.
+                      </video>
                       <div class="news-date">12 Decembre 2024</div>
                   </div>
                   <div class="news-content">
@@ -698,6 +720,7 @@
                         <p>Victoire au concours Csquared woezon</p>
                     </div>
                 </div>
+                
                 <div class="news-card">
                   <div class="news-media">
                       <img src="seic.jpeg" alt="Partenariat stratégique" class="enlargeable-image">
@@ -755,7 +778,7 @@
                 <div class="team-member">
                     <img src="liliane.jpeg" alt="DIOGO Marie-Liliane" class="team-photo enlargeable-image">
                     <h3>DIOGO Marie-Liliane</h3>
-                    <p> Assistant Marketing Officer</p>
+                    <p>Assistant Marketing Officer</p>
                 </div>
                 
                 <div class="team-member">
@@ -810,37 +833,35 @@
     </section>
     
     <section id="contact">
-        <div class="container">
-            <h2>Contactez-nous</h2>
-            <div class="contact-form">
-                <form id="contactForm" action="https://formspree.io/f/mqkrnqgz" method="POST">
-                    <div class="form-group">
-                        <label for="name">Nom complet</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <input type="hidden" name="_cc" value="damiennedjata3@gmail.com">
-                    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-                    
-                    <button type="submit" class="btn">Envoyer</button>
-                </form>
-            </div>
-        </div>
+        <h2>Contactez-nous</h2>
+        <div class="contact-form">
+            <form name="contact" method="POST" data-netlify="true">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <!-- Hidden field for Netlify -->
+                <input type="hidden" name="form-name" value="contact">
+        
+                <button type="submit" class="btn">Envoyer</button>
+            </form>
+        </div>        
     </section>
     
     <footer>
@@ -864,8 +885,8 @@
             <!-- Content will be inserted here by JavaScript -->
         </div>
         <div class="video-controls" id="video-controls" style="display: none;">
-            <button id="unmute-btn">Activer le son</button>
-            <button id="fullscreen-btn">Plein écran</button>
+            <button id="unmute-btn"><i class="fas fa-volume-mute"></i> Son</button>
+            <button id="fullscreen-btn"><i class="fas fa-expand"></i> Plein écran</button>
         </div>
     </div>
     
@@ -944,7 +965,7 @@
         // Function to open lightbox with video
         function openVideoLightbox(videoSrc) {
             lightboxContent.innerHTML = `
-                <video class="lightbox-video" controls autoplay>
+                <video class="lightbox-video" autoplay>
                     <source src="${videoSrc}" type="video/mp4">
                     Votre navigateur ne supporte pas les vidéos HTML5.
                 </video>
@@ -954,7 +975,11 @@
             document.body.style.overflow = 'hidden';
             
             currentVideo = lightboxContent.querySelector('video');
-            currentVideo.muted = true;
+            currentVideo.muted = true; // Son coupé par défaut
+            currentVideo.controls = false; // On utilise nos propres contrôles
+            
+            // Mettre à jour l'icône du bouton mute
+            unmuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i> Son';
         }
         
         // Close lightbox
@@ -966,48 +991,51 @@
             }
             document.body.style.overflow = 'auto';
         }
-        
-        // Event listeners for all enlargeable images
+
+        // Event listeners pour images cliquables
         document.querySelectorAll('.enlargeable-image').forEach(img => {
             img.addEventListener('click', function() {
                 openImageLightbox(this.src, this.alt);
             });
         });
-        
-        // Event listeners for all enlargeable videos
-        document.querySelectorAll('.enlargeable-video').forEach(iframe => {
-            iframe.addEventListener('click', function(e) {
+
+        // Event listeners pour vidéos cliquables
+        document.querySelectorAll('.enlargeable-video').forEach(video => {
+            video.addEventListener('click', function(e) {
                 e.preventDefault();
-                const videoSrc = this.src;
+                const videoSrc = this.getAttribute('data-src') || this.src;
                 openVideoLightbox(videoSrc);
             });
         });
-        
-        // Close lightbox when clicking the X
+
+        // Fermer la lightbox quand on clique sur la croix
         closeLightbox.addEventListener('click', closeLightboxFunc);
-        
-                // Close lightbox when clicking outside the content
-                lightbox.addEventListener('click', function(e) {
+
+        // Fermer la lightbox en cliquant en dehors du contenu
+        lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
                 closeLightboxFunc();
             }
         });
-                // Unmute button
-                unmuteBtn.addEventListener('click', function () {
+
+        // Bouton pour activer/désactiver le son
+        unmuteBtn.addEventListener('click', function () {
             if (currentVideo) {
                 currentVideo.muted = !currentVideo.muted;
-                unmuteBtn.innerHTML = currentVideo.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+                unmuteBtn.innerHTML = currentVideo.muted
+                    ? '<i class="fas fa-volume-mute"></i> Son'
+                    : '<i class="fas fa-volume-up"></i> Son';
             }
         });
 
-        // Fullscreen button
+        // Bouton pour passer en plein écran
         fullscreenBtn.addEventListener('click', function () {
             if (currentVideo) {
                 if (currentVideo.requestFullscreen) {
                     currentVideo.requestFullscreen();
-                } else if (currentVideo.webkitRequestFullscreen) { // Safari
+                } else if (currentVideo.webkitRequestFullscreen) {
                     currentVideo.webkitRequestFullscreen();
-                } else if (currentVideo.msRequestFullscreen) { // IE11
+                } else if (currentVideo.msRequestFullscreen) {
                     currentVideo.msRequestFullscreen();
                 }
             }
