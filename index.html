@@ -986,7 +986,6 @@
                 nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
         });
-        
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
         const lightboxContent = document.getElementById('lightbox-content');
@@ -1033,6 +1032,22 @@
             }
             document.body.style.overflow = 'auto';
         }
+
+        // Event listeners pour images cliquables
+        document.querySelectorAll('.enlargeable-image').forEach(img => {
+            img.addEventListener('click', function() {
+                openImageLightbox(this.src, this.alt);
+            });
+        });
+
+        // Event listeners pour vidéos cliquables
+        document.querySelectorAll('.enlargeable-video').forEach(video => {
+            video.addEventListener('click', function(e) {
+                e.preventDefault();
+                const videoSrc = this.getAttribute('data-src') || this.src;
+                openVideoLightbox(videoSrc);
+            });
+        });
 
         // Fermer la lightbox quand on clique sur la croix
         closeLightbox.addEventListener('click', closeLightboxFunc);
