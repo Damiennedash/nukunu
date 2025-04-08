@@ -835,25 +835,25 @@
     <section id="contact">
         <h2>Contactez-nous</h2>
         <div class="contact-form">
-            <form action="https://formsubmit.co/damiennedjata3@gmail.com" method="POST">
-                <label>Nom complet :</label>
-                <input type="text" name="name" required>
+            <form action="https://formspree.io/f/mgvapqlp" method="POST">
+                <label for="name">Nom complet :</label>
+                <input type="text" name="name" id="name" required>
               
-                <label>Email :</label>
-                <input type="email" name="email" required>
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="email" required>
               
-                <label>Sujet :</label>
-                <input type="text" name="subject" required>
+                <label for="subject">Sujet :</label>
+                <input type="text" name="subject" id="subject" required>
               
-                <label>Message :</label>
-                <textarea name="message" required></textarea>
+                <label for="message">Message :</label>
+                <textarea name="message" id="message" required></textarea>
               
-                <!-- options supplémentaires -->
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://tonsite.com/merci.html"> <!-- page après envoi -->
+                <!-- Champ caché pour éviter le spam -->
+                <input type="hidden" name="_captcha" value="false"> <!-- désactive le captcha -->
               
                 <button type="submit">Envoyer</button>
               </form>
+              
               
         </div>
     </section>
