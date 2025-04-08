@@ -835,35 +835,35 @@
     <section id="contact">
         <h2>Contactez-nous</h2>
         <div class="contact-form">
-            <form name="contact" method="POST" data-netlify="true">
-                <div class="form-group">
-                    <label for="name">Nom complet</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Sujet</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <!-- Hidden field for Netlify -->
-                <input type="hidden" name="form-name" value="contact">
-        
-                <button type="submit" class="btn">Envoyer</button>
-            </form>
-        </div>        
-    </section>
-    
+          <form name="contact" method="POST" data-netlify="true" netlify>
+            <div class="form-group">
+              <label for="name">Nom complet</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+      
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+      
+            <div class="form-group">
+              <label for="subject">Sujet</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+      
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+      
+            <!-- Champ caché obligatoire pour que Netlify reconnaisse le formulaire -->
+            <input type="hidden" name="form-name" value="contact">
+      
+            <button type="submit" class="btn">Envoyer</button>
+          </form>
+        </div>
+      </section>
+      
     <footer>
         <div class="logo">NUKUNU</div>
         <p>Révolutionner l'accès à l'énergie en Afrique</p>
@@ -913,36 +913,6 @@
                 nav.style.background = 'var(--light)';
                 nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
-        });
-        
-        // Form submission
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            
-            // Send data using Fetch API
-            fetch('https://formspree.io/f/mqkrnqgz', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Message envoyé avec succès!');
-                    contactForm.reset();
-                } else {
-                    throw new Error('Erreur lors de l\'envoi du message');
-                }
-            })
-            .catch(error => {
-                alert('Une erreur est survenue. Veuillez réessayer plus tard.');
-                console.error('Error:', error);
-            });
         });
         
         // Lightbox functionality
