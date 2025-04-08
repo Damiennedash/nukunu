@@ -1,0 +1,6 @@
+git add .
+
+git commit -m "page de video"
+
+git push origin main 
+

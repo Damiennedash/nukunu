@@ -44,13 +44,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: var(--light);
             padding: 15px 20px;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background-color 0.3s;
         }
         
         .nav-logo {
@@ -67,7 +68,7 @@
         }
         
         .nav-links li a {
-            color: var(--light);
+            color: var(--dark);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
@@ -152,6 +153,12 @@
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.02);
         }
         
         .mission-vision {
@@ -205,6 +212,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            cursor: pointer;
         }
         
         .product-card:hover .product-image img {
@@ -237,6 +245,12 @@
             object-fit: cover;
             margin: 0 auto 20px;
             border: 5px solid var(--primary);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .team-photo:hover {
+            transform: scale(1.05);
         }
         
         .team-member h3 {
@@ -359,6 +373,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            cursor: pointer;
         }
         
         .news-media iframe {
@@ -403,6 +418,65 @@
             text-decoration: underline;
         }
         
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img, .lightbox-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .lightbox-video {
+            width: 80%;
+            height: 80%;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .video-controls button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
         @media (max-width: 768px) {
             .about-content {
                 flex-direction: column;
@@ -433,6 +507,11 @@
             
             .news-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .lightbox-video {
+                width: 95%;
+                height: auto;
             }
         }
     </style>
@@ -480,7 +559,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Panneaux solaires en Afrique">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Panneaux solaires en Afrique" class="enlargeable-image">
                 </div>
             </div>
         </div>
@@ -511,7 +590,7 @@
             <div class="product-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="batterie.jpg" alt="Batteries de stockage">
+                        <img src="batterie.jpg" alt="Batteries de stockage" class="enlargeable-image">
                     </div>
                     <div class="product-content">
                         <h3>Batteries de stockage</h3>
@@ -521,7 +600,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Panneaux solaires">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Panneaux solaires" class="enlargeable-image">
                     </div>
                     <div class="product-content">
                         <h3>Panneaux solaires</h3>
@@ -531,7 +610,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mini-réseaux solaires">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mini-réseaux solaires" class="enlargeable-image">
                     </div>
                     <div class="product-content">
                         <h3>Mini-réseaux solaires</h3>
@@ -541,7 +620,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Super-application">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Super-application" class="enlargeable-image">
                     </div>
                     <div class="product-content">
                         <h3>Super-application</h3>
@@ -551,7 +630,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energy-as-a-Service">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energy-as-a-Service" class="enlargeable-image">
                     </div>
                     <div class="product-content">
                         <h3>Energy-as-a-Service</h3>
@@ -561,7 +640,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Solutions sur mesure">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Solutions sur mesure" class="enlargeable-image">
                     </div>
                     <div class="product-content">
                         <h3>Solutions sur mesure</h3>
@@ -580,7 +659,7 @@
                 
                 <div class="news-card">
                   <div class="news-media">
-                     <iframe src="brain.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     <iframe src="brain.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen muted class="enlargeable-video"></iframe>
                      <div class="news-date">10 Février 2024</div>
                   </div>
                   <div class="news-content">
@@ -590,7 +669,7 @@
                 </div>
                 <div class="news-card">
                     <div class="news-media">
-                        <iframe src="foire.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="foire.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen muted class="enlargeable-video"></iframe>
                         <div class="news-date">12 Decembre 2024</div>
                     </div>
                     <div class="news-content">
@@ -600,7 +679,7 @@
                 </div>
                 <div class="news-card">
                   <div class="news-media">
-                      <iframe src="vente.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <iframe src="vente.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen muted class="enlargeable-video"></iframe>
                       <div class="news-date">12 Decembre 2024</div>
                   </div>
                   <div class="news-content">
@@ -611,7 +690,7 @@
                 
                 <div class="news-card">
                     <div class="news-media">
-                        <img src="victoire csquared.jpeg" alt="Partenariat stratégique">
+                        <img src="victoire csquared.jpeg" alt="Partenariat stratégique" class="enlargeable-image">
                         <div class="news-date">14 Février 2024</div>
                     </div>
                     <div class="news-content">
@@ -621,7 +700,7 @@
                 </div>
                 <div class="news-card">
                   <div class="news-media">
-                      <img src="seic.jpeg" alt="Partenariat stratégique">
+                      <img src="seic.jpeg" alt="Partenariat stratégique" class="enlargeable-image">
                       <div class="news-date">07 Avril 2025</div>
                   </div>
                   <div class="news-content">
@@ -638,61 +717,61 @@
             <h2>Notre Équipe</h2>
             <div class="team-grid">
                 <div class="team-member">
-                    <img src="chritian.jpeg" alt="DJOMATIN AHO Christian" class="team-photo">
+                    <img src="chritian.jpeg" alt="DJOMATIN AHO Christian" class="team-photo enlargeable-image">
                     <h3>DJOMATIN AHO Christian</h3>
                     <p>Directeur Général</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="adnane.jpeg" alt="KEZIRE Adnane" class="team-photo">
+                    <img src="adnane.jpeg" alt="KEZIRE Adnane" class="team-photo enlargeable-image">
                     <h3>KEZIRE Adnane</h3>
                     <p>Chief Digital Officer</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="harmonia.jpeg" alt="DOH-BARRY Harmonia" class="team-photo">
+                    <img src="harmonia.jpeg" alt="DOH-BARRY Harmonia" class="team-photo enlargeable-image">
                     <h3>DOH-BARRY Harmonia</h3>
                     <p>Chief Design Officer</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="Damienne.jpeg" alt="DIATA Damienne" class="team-photo">
+                    <img src="Damienne.jpeg" alt="DIATA Damienne" class="team-photo enlargeable-image">
                     <h3>DIATA Damienne</h3>
                     <p>Chief of Staff</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="Hiwe.jpeg" alt="N'DIANOJINAI Hiwè" class="team-photo">
+                    <img src="hiwe.jpeg" alt="N'DIANOJINAI Hiwè" class="team-photo enlargeable-image">
                     <h3>N'DIANOJINAI Hiwè</h3>
                     <p>Chief Technology Officer</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="Marzourk.jpeg" alt="OURO-AKONDO Marzouk" class="team-photo">
+                    <img src="Marzourk.jpeg" alt="OURO-AKONDO Marzouk" class="team-photo enlargeable-image">
                     <h3>OURO-AKONDO Marzouk</h3>
                     <p>Chief Marketing Officer</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="liliane.jpeg" alt="DIOGO Marie-Liliane" class="team-photo">
+                    <img src="liliane.jpeg" alt="DIOGO Marie-Liliane" class="team-photo enlargeable-image">
                     <h3>DIOGO Marie-Liliane</h3>
                     <p> Assistant Marketing Officer</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="therese.jpeg" alt="YAWO Thérèse" class="team-photo">
+                    <img src="therese.jpeg" alt="YAWO Thérèse" class="team-photo enlargeable-image">
                     <h3>YAWO Thérèse</h3>
                     <p>Assistant Financial Officer</p>
                 </div>
 
                 <div class="team-member">
-                    <img src="Elia.jpeg" alt="BATAKO Elia" class="team-photo">
+                    <img src="Elia.jpeg" alt="BATAKO Elia" class="team-photo enlargeable-image">
                     <h3>BATAKO Elia</h3>
                     <p>Chief Financial Officer</p>
                 </div>
                 
                 <div class="team-member">
-                    <img src="Joanella.jpg" alt="ZINSOU-BODE A.J.Laurielle" class="team-photo">
+                    <img src="Joanella.jpg" alt="ZINSOU-BODE A.J.Laurielle" class="team-photo enlargeable-image">
                     <h3>ZINSOU-BODE A.J.Laurielle</h3>
                     <p>Assistant Marketing Officer</p>
                 </div>
@@ -705,7 +784,7 @@
             <h2>Notre Impact</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Impact social">
+                    <img src="nature.jpeg" alt="Impact social" class="enlargeable-image">
                 </div>
                 <div class="about-text">
                     <h3>Impact Social</h3>
@@ -778,6 +857,18 @@
         <p>&copy; 2024 NUKUNU Solar. Tous droits réservés.</p>
     </footer>
     
+    <!-- Lightbox HTML -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-content" id="lightbox-content">
+            <!-- Content will be inserted here by JavaScript -->
+        </div>
+        <div class="video-controls" id="video-controls" style="display: none;">
+            <button id="unmute-btn">Activer le son</button>
+            <button id="fullscreen-btn">Plein écran</button>
+        </div>
+    </div>
+    
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
         // Smooth scrolling for navigation links
@@ -791,13 +882,15 @@
             });
         });
         
-        // Sticky navigation
+        // Sticky navigation with white background
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(0, 51, 102, 0.9)';
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             } else {
-                nav.style.background = 'var(--secondary)';
+                nav.style.background = 'var(--light)';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
         });
         
@@ -829,6 +922,95 @@
                 alert('Une erreur est survenue. Veuillez réessayer plus tard.');
                 console.error('Error:', error);
             });
+        });
+        
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightbox-content');
+        const closeLightbox = document.querySelector('.close-lightbox');
+        const videoControls = document.getElementById('video-controls');
+        const unmuteBtn = document.getElementById('unmute-btn');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        let currentVideo = null;
+        
+        // Function to open lightbox with image
+        function openImageLightbox(imgSrc, altText) {
+            lightboxContent.innerHTML = `<img src="${imgSrc}" alt="${altText}">`;
+            lightbox.style.display = 'flex';
+            videoControls.style.display = 'none';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to open lightbox with video
+        function openVideoLightbox(videoSrc) {
+            lightboxContent.innerHTML = `
+                <video class="lightbox-video" controls autoplay>
+                    <source src="${videoSrc}" type="video/mp4">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+            `;
+            lightbox.style.display = 'flex';
+            videoControls.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            currentVideo = lightboxContent.querySelector('video');
+            currentVideo.muted = true;
+        }
+        
+        // Close lightbox
+        function closeLightboxFunc() {
+            lightbox.style.display = 'none';
+            if (currentVideo) {
+                currentVideo.pause();
+                currentVideo = null;
+            }
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event listeners for all enlargeable images
+        document.querySelectorAll('.enlargeable-image').forEach(img => {
+            img.addEventListener('click', function() {
+                openImageLightbox(this.src, this.alt);
+            });
+        });
+        
+        // Event listeners for all enlargeable videos
+        document.querySelectorAll('.enlargeable-video').forEach(iframe => {
+            iframe.addEventListener('click', function(e) {
+                e.preventDefault();
+                const videoSrc = this.src;
+                openVideoLightbox(videoSrc);
+            });
+        });
+        
+        // Close lightbox when clicking the X
+        closeLightbox.addEventListener('click', closeLightboxFunc);
+        
+                // Close lightbox when clicking outside the content
+                lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightboxFunc();
+            }
+        });
+                // Unmute button
+                unmuteBtn.addEventListener('click', function () {
+            if (currentVideo) {
+                currentVideo.muted = !currentVideo.muted;
+                unmuteBtn.innerHTML = currentVideo.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            }
+        });
+
+        // Fullscreen button
+        fullscreenBtn.addEventListener('click', function () {
+            if (currentVideo) {
+                if (currentVideo.requestFullscreen) {
+                    currentVideo.requestFullscreen();
+                } else if (currentVideo.webkitRequestFullscreen) { // Safari
+                    currentVideo.webkitRequestFullscreen();
+                } else if (currentVideo.msRequestFullscreen) { // IE11
+                    currentVideo.msRequestFullscreen();
+                }
+            }
         });
     </script>
 </body>
