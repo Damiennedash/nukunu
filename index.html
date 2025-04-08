@@ -413,16 +413,6 @@
             color: #555;
         }
         
-       /* Conteneur principal */
-       #contact {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #f9f9f9;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-out;
-        }
 
         /* Effet d'apparition */
         @keyframes fadeIn {
@@ -922,29 +912,28 @@
             </div>
         </div>
     </section>
-    
-    
     <section id="contact">
         <h2>Contactez-nous</h2>
         <div class="contact-form">
-            <form id="contactForm" action="https://formspree.io/f/mgvapqlp" method="POST">
+            <form action="https://formspree.io/f/mgvapqlp" method="POST">
                 <label for="name">Nom complet :</label>
                 <input type="text" name="name" id="name" required>
-
+              
                 <label for="email">Email :</label>
                 <input type="email" name="email" id="email" required>
-
+              
                 <label for="subject">Sujet :</label>
                 <input type="text" name="subject" id="subject" required>
-
+              
                 <label for="message">Message :</label>
                 <textarea name="message" id="message" required></textarea>
-
-                <input type="hidden" name="_captcha" value="false">
-                
+              
+                <!-- Champ caché pour éviter le spam -->
+                <input type="hidden" name="_captcha" value="false"> <!-- désactive le captcha -->
+              
                 <button type="submit">Envoyer</button>
             </form>
-            <div id="responseMessage" class="message"></div>
+              
         </div>
     </section>
     <footer>
