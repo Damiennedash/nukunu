@@ -413,6 +413,97 @@
             color: #555;
         }
         
+       /* Conteneur principal */
+       #contact {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Effet d'apparition */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Titre du formulaire */
+        #contact h2 {
+            text-align: center;
+            color: #2575fc;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* Style du formulaire */
+        .contact-form label {
+            display: block;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #6a11cb;
+        }
+
+        .contact-form button:active {
+            background-color: #4a90e2;
+        }
+
+        /* Message de succès ou d'erreur */
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .message.success {
+            color: green;
+        }
+
+        .message.error {
+            color: red;
+        }
+
+        /* Style pour les champs de texte */
+        .contact-form textarea {
+            resize: vertical;
+            height: 150px;
+        }
         .read-more {
             color: var(--primary);
             text-decoration: none;
@@ -832,32 +923,30 @@
         </div>
     </section>
     
+    
     <section id="contact">
         <h2>Contactez-nous</h2>
         <div class="contact-form">
-            <form action="https://formspree.io/f/mgvapqlp" method="POST">
+            <form id="contactForm" action="https://formspree.io/f/mgvapqlp" method="POST">
                 <label for="name">Nom complet :</label>
                 <input type="text" name="name" id="name" required>
-              
+
                 <label for="email">Email :</label>
                 <input type="email" name="email" id="email" required>
-              
+
                 <label for="subject">Sujet :</label>
                 <input type="text" name="subject" id="subject" required>
-              
+
                 <label for="message">Message :</label>
                 <textarea name="message" id="message" required></textarea>
-              
-                <!-- Champ caché pour éviter le spam -->
-                <input type="hidden" name="_captcha" value="false"> <!-- désactive le captcha -->
-              
+
+                <input type="hidden" name="_captcha" value="false">
+                
                 <button type="submit">Envoyer</button>
-              </form>
-              
-              
+            </form>
+            <div id="responseMessage" class="message"></div>
         </div>
     </section>
-      
     <footer>
         <div class="logo">NUKUNU</div>
         <p>Révolutionner l'accès à l'énergie en Afrique</p>
@@ -956,19 +1045,36 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Event listeners pour images cliquables
-        document.querySelectorAll('.enlargeable-image').forEach(img => {
-            img.addEventListener('click', function() {
-                openImageLightbox(this.src, this.alt);
-            });
-        });
+         // Récupère le formulaire et le message de réponse
+        const form = document.getElementById('contactForm');
+        const responseMessage = document.getElementById('responseMessage');
 
-        // Event listeners pour vidéos cliquables
-        document.querySelectorAll('.enlargeable-video').forEach(video => {
-            video.addEventListener('click', function(e) {
-                e.preventDefault();
-                const videoSrc = this.getAttribute('data-src') || this.src;
-                openVideoLightbox(videoSrc);
+        // Soumission du formulaire
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche la soumission par défaut
+
+            // Récupère les données du formulaire
+            const formData = new FormData(form);
+
+            // Envoie les données via Fetch API
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    responseMessage.textContent = "Message envoyé avec succès!";
+                    responseMessage.classList.remove('error');
+                    responseMessage.classList.add('success');
+                    form.reset(); // Réinitialise le formulaire
+                } else {
+                    throw new Error("Une erreur s'est produite lors de l'envoi.");
+                }
+            })
+            .catch(error => {
+                responseMessage.textContent = "Une erreur est survenue. Veuillez réessayer.";
+                responseMessage.classList.remove('success');
+                responseMessage.classList.add('error');
             });
         });
 
