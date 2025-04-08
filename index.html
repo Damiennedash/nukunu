@@ -1045,39 +1045,6 @@
             document.body.style.overflow = 'auto';
         }
 
-         // Récupère le formulaire et le message de réponse
-        const form = document.getElementById('contactForm');
-        const responseMessage = document.getElementById('responseMessage');
-
-        // Soumission du formulaire
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Empêche la soumission par défaut
-
-            // Récupère les données du formulaire
-            const formData = new FormData(form);
-
-            // Envoie les données via Fetch API
-            fetch(form.action, {
-                method: form.method,
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    responseMessage.textContent = "Message envoyé avec succès!";
-                    responseMessage.classList.remove('error');
-                    responseMessage.classList.add('success');
-                    form.reset(); // Réinitialise le formulaire
-                } else {
-                    throw new Error("Une erreur s'est produite lors de l'envoi.");
-                }
-            })
-            .catch(error => {
-                responseMessage.textContent = "Une erreur est survenue. Veuillez réessayer.";
-                responseMessage.classList.remove('success');
-                responseMessage.classList.add('error');
-            });
-        });
-
         // Fermer la lightbox quand on clique sur la croix
         closeLightbox.addEventListener('click', closeLightboxFunc);
 
