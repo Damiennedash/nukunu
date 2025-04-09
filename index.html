@@ -38,45 +38,72 @@
             color: var(--light);
             padding: 0 20px;
         }
-        
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--light);
-            padding: 15px 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-logo {
-            height: 40px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin: 0 15px;
-        }
-        
-        .nav-links li a {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links li a:hover {
-            color: var(--primary);
-        }
+  /* Navbar de base */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-logo {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #007bff;
+}
+
+/* Burger menu */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.menu-text {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Conteneur des barres burger */
+.burger-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Style des barres */
+.burger {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+}
         
         .logo {
             font-size: 2rem;
@@ -578,60 +605,85 @@
             align-items: center;
             gap: 5px;
         }
-        
         @media (max-width: 768px) {
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .mission-vision {
-                flex-direction: column;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            nav {
-                flex-direction: column;
-                padding: 10px;
-            }
-            
-            .nav-links {
-                margin-top: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links li {
-                margin: 5px 10px;
-            }
-            
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .lightbox-video {
-                width: 95%;
-                height: auto;
-            }
-        }
-    </style>
+    /* Section À propos */
+    .about-content {
+        flex-direction: column;
+    }
+
+    /* Mission et Vision */
+    .mission-vision {
+        flex-direction: column;
+    }
+
+    /* Titre principal (hero) */
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .nav-toggle-label {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label + .nav-links {
+    max-height: 400px;
+  }
+    /* Grille des actualités */
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Vidéos dans la lightbox */
+    .lightbox-video {
+        width: 95%;
+        height: auto;
+    }
+
+</style>
 </head>
 <body>
     <nav>
         <img src="nukunu.png" alt="NUKUNU Logo" class="nav-logo">
+      
+        <!-- Toggle pour le menu burger -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span class="menu-text">Menu</span>
+          <div class="burger-lines">
+            <span class="burger"></span>
+            <span class="burger"></span>
+            <span class="burger"></span>
+          </div>
+        </label>
+      
+        <!-- Liens de navigation -->
         <ul class="nav-links">
-            <li><a href="#home">Accueil</a></li>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#products">Produits</a></li>
-            <li><a href="#news">Actualités</a></li>
-            <li><a href="#team">Équipe</a></li>
-            <li><a href="#impact">Impact</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#products">Produits</a></li>
+          <li><a href="#news">Actualités</a></li>
+          <li><a href="#team">Équipe</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-    
+      
     <header id="home">
         <div class="logo">NUKUNU</div>
         <div class="hero">
